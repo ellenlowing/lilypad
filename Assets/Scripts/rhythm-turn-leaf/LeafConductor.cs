@@ -2,6 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FroggyNamespace;
+
+namespace FroggyNamespace
+{
+    public enum GameState
+    {
+        Start,
+        Playing,
+        Win,
+        Lose
+    }
+}
 
 public class LeafConductor : MonoBehaviour
 {
@@ -21,6 +33,8 @@ public class LeafConductor : MonoBehaviour
 
     [SerializeField]
     GameObject player;
+
+    public GameState currentGameState;
     
     float secPerBeat;
     float songPosition;
@@ -30,10 +44,11 @@ public class LeafConductor : MonoBehaviour
     public int nextIndex;
     // AudioSource musicSource;
 
-    float gameScore = 0f;
+    [SerializeField]
+    TextMeshProUGUI countdownText;
 
-    // [SerializeField]
-    // TextMeshProUGUI scoreText;
+    [SerializeField]
+    TextMeshProUGUI gameStateText;
 
     Vector3 prevNotePosition;
 
@@ -70,15 +85,28 @@ public class LeafConductor : MonoBehaviour
         
         if(nextIndex < notes.Length && notes[nextIndex] < (songPositionInBeats + beatsShownInAdvance))
         {
-            
             player.GetComponent<MovePlayer>().Jump();
-
             nextIndex++;
+        } 
+        else if (songPositionInBeats < -1f)
+        {
+            countdownText.SetText("{0:0}", Mathf.Floor(-songPositionInBeats-1));
         }
-    }
+        else
+        {
+            countdownText.gameObject.SetActive(false);
+        }
 
-    public void AddScore(float score) {
-        gameScore += score;
-        // scoreText.SetText("{0:0}", gameScore);
+        switch(currentGameState)
+        {
+            case GameState.Win:
+                gameStateText.SetText("Froggy won!");
+                gameStateText.gameObject.SetActive(true);
+                break;
+            
+            case GameState.Lose:
+                gameStateText.SetText("Froggy lost :(");
+                break;
+        }
     }
 }

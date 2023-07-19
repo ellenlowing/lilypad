@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FroggyNamespace;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -58,12 +59,13 @@ public class MovePlayer : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.tag == "Lilypad")
         {
-            onLilypad = true; // this is not firing
+            onLilypad = true; 
             activeLilypadTransform = other.gameObject.transform;
         }
         else if (other.gameObject.tag == "Finish")
         {
-            gameWon = true;
+            // gameWon = true;
+            LeafConductor.instance.currentGameState = GameState.Win;
         }   
     }
 
