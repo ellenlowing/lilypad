@@ -83,7 +83,7 @@ public class LeafConductor : MonoBehaviour
         songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
         songPositionInBeats = songPosition / secPerBeat;
         
-        if(nextIndex < notes.Length && notes[nextIndex] < (songPositionInBeats + beatsShownInAdvance))
+        if(nextIndex < notes.Length && notes[nextIndex] < songPositionInBeats)
         {
             player.GetComponent<MovePlayer>().Jump();
             nextIndex++;
