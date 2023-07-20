@@ -106,6 +106,7 @@ public class LeafConductor : MonoBehaviour
             
             case GameState.Lose:
                 gameStateText.SetText("Froggy lost :(");
+                gameStateText.gameObject.SetActive(true);
                 break;
         }
     }

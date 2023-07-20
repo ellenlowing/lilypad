@@ -14,12 +14,14 @@ public class MovePlayer : MonoBehaviour
     [SerializeField]
     float stepSize;
 
-    private Animator anim;
+    private Animator animator;
+
+    [SerializeField]
+    private AnimationClip hopAnimation;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-        jumpDirection = new Vector3(1f, 0f, 0f);
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -56,9 +58,9 @@ public class MovePlayer : MonoBehaviour
 
     public void Jump()
     {
-        if(!hopping)
+        if(!hopping && LeafConductor.instance.currentGameState != GameState.Lose)
         {
-            anim.SetTrigger("hopping");
+            animator.SetTrigger("hopping");
             StartCoroutine(Hop(stepSize));
         }
     }
@@ -73,9 +75,9 @@ public class MovePlayer : MonoBehaviour
             0f
         );
         float time = 0;
-        float duration = 7f / 8f; // frames in sequence / sprite fps
-        float startHopTime = 3f / 8f;
-        float endHopTime = 5f / 8f;
+        float duration = hopAnimation.length; // frames in sequence / sprite fps
+        float startHopTime = 3f / hopAnimation.frameRate; // 3 is the start frame in sprite sheet that hop motion takes place
+        float endHopTime = 5f / hopAnimation.frameRate; // 5 is landing frame
         float hopDuration = endHopTime - startHopTime;
         while(time < duration)
         {
@@ -87,24 +89,43 @@ public class MovePlayer : MonoBehaviour
             yield return null;
         }
         hopping = false;
+
+        // check at the end of a hop and see if it's not on lilypad
+        if(!onLilypad)
+        {
+            Debug.Log("You lose!");
+            LeafConductor.instance.currentGameState = GameState.Lose;
+            animator.SetBool("gameLost", true);
+        }
     }
     
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.tag == "Lilypad")
+        if(other.gameObject.CompareTag("Lilypad"))
         {
             onLilypad = true; 
             activeLilypadTransform = other.gameObject.transform;
+            // Debug.Log("enter lilypad " + other.gameObject.name);
         }
-        else if (other.gameObject.tag == "Finish")
+        
+        if (other.gameObject.CompareTag("Finish"))
         {
             LeafConductor.instance.currentGameState = GameState.Win;
         }   
     }
 
+    private void OnCollisionStay2D(Collision2D other) {
+        if(other.gameObject.CompareTag("Lilypad"))
+        {
+            onLilypad = true;
+            // Debug.Log("staying lilypad " + other.gameObject.name);
+        }
+    }
+
     private void OnCollisionExit2D(Collision2D other) {
-        if(other.gameObject.tag == "Lilypad")
+        if(other.gameObject.CompareTag("Lilypad"))
         {
             onLilypad = false;
+            // Debug.Log("leaving lilypad " + other.gameObject.name);
         }
     }
 }
