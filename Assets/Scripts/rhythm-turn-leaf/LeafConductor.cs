@@ -29,11 +29,9 @@ public class LeafConductor : MonoBehaviour
     [SerializeField]
     float firstBeatOffset;
 
-    [SerializeField, Range(0f, 8f)]
-    public float beatsShownInAdvance;
-
     [SerializeField]
     GameObject player;
+    PlayerStateManager playerManager;
 
     public GameState currentGameState = GameState.Intro;
     
@@ -75,6 +73,8 @@ public class LeafConductor : MonoBehaviour
         {
             notes[i] = (float)i;
         }
+
+        playerManager = player.GetComponent<PlayerStateManager>();
     }
 
     void Update()
@@ -86,7 +86,7 @@ public class LeafConductor : MonoBehaviour
             
             if(nextIndex < notes.Length && notes[nextIndex] < songPositionInBeats)
             {
-                player.GetComponent<MovePlayer>().Jump();
+                playerManager.SetState(playerManager.HopState);
                 nextIndex++;
             } 
             else if (songPositionInBeats < 0f)
