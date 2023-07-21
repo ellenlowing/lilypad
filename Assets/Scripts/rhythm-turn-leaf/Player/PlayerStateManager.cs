@@ -16,7 +16,7 @@ public class PlayerStateManager : MonoBehaviour
     [SerializeField] public AnimationClip hopAnimationClip;
 
     // Collision stuff
-    public BoxCollider2D collider;
+    public BoxCollider2D boxCollider;
 
     // Global variables
     public Vector3 hopDirection = Vector3.zero;
@@ -28,7 +28,7 @@ public class PlayerStateManager : MonoBehaviour
 
         animator = GetComponent<Animator>();
 
-        collider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()

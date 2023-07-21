@@ -40,7 +40,7 @@ public class PlayerHopState : PlayerBaseState
         else 
         {
             Collider2D[] otherColliders = new Collider2D[10];
-            int contactsCount = player.collider.GetContacts(otherColliders);
+            int contactsCount = player.boxCollider.GetContacts(otherColliders);
             bool onLilypad = false;
             for(int i = 0; i < contactsCount; i++)
             {

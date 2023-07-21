@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 0
-  randomizeAngle: 0
+  randomizeAngle: 1
 --- !u!1001 &323869752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -654,7 +654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868859444760362681, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
       propertyPath: randomizeAngle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
@@ -1195,7 +1195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868859444760362681, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
       propertyPath: randomizeAngle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
@@ -1595,7 +1595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868859444760362681, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
       propertyPath: randomizeAngle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
@@ -1661,7 +1661,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868859444760362681, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
       propertyPath: randomizeAngle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
@@ -2024,7 +2024,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868859444760362681, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
       propertyPath: randomizeAngle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
@@ -2372,7 +2372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868859444760362681, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
       propertyPath: randomizeAngle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
@@ -2692,6 +2692,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   hopAnimationClip: {fileID: 7400000, guid: 5bbac8d1e91df43f98e1d8f1cb1414e5, type: 2}
+  boxCollider: {fileID: 0}
   hopDirection: {x: 0, y: 0, z: 0}
 --- !u!1001 &1435932555
 PrefabInstance:
@@ -3563,7 +3564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868859444760362681, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
       propertyPath: randomizeAngle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
@@ -3826,7 +3827,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5868859444760362681, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
       propertyPath: randomizeAngle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41931e7dc4ab941a295234cc6b33ba8a, type: 3}
