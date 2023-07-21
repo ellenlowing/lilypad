@@ -13,29 +13,32 @@ public class PlayerIdleState : PlayerBaseState
     {
         player.hopDirection = Vector3.zero;
         
-        float rotZ = lilypadTransform.localEulerAngles.z % 360;
-        if(rotZ == 0f) 
+        if(lilypadTransform != null)
         {
-            player.hopDirection.y = 1f;
-        } 
-        else if (rotZ == 180f)
-        {
-            player.hopDirection.y = -1f;
-        } 
-        else if (rotZ == 90f)
-        {
-            player.hopDirection.x = -1f;
-        } 
-        else if (rotZ == 270f)
-        {
-            player.hopDirection.x = 1f;
+            float rotZ = lilypadTransform.localEulerAngles.z % 360;
+            if(rotZ == 0f) 
+            {
+                player.hopDirection.y = 1f;
+            } 
+            else if (rotZ == 180f)
+            {
+                player.hopDirection.y = -1f;
+            } 
+            else if (rotZ == 90f)
+            {
+                player.hopDirection.x = -1f;
+            } 
+            else if (rotZ == 270f)
+            {
+                player.hopDirection.x = 1f;
+            }
+            player.transform.localEulerAngles = new Vector3(0f, 0f, rotZ + 90f);
         }
-        player.transform.localEulerAngles = new Vector3(0f, 0f, rotZ + 90f);
+        
     }
 
     public override void OnCollisionEnter2D(PlayerStateManager player, Collision2D other)
     {
-        
     }
 
     public override void OnCollisionStay2D(PlayerStateManager player, Collision2D other)

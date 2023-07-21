@@ -39,7 +39,26 @@ public class PlayerHopState : PlayerBaseState
         } 
         else 
         {
-            player.SetState(player.IdleState);
+            Collider2D[] otherColliders = new Collider2D[10];
+            int contactsCount = player.collider.GetContacts(otherColliders);
+            bool onLilypad = false;
+            for(int i = 0; i < contactsCount; i++)
+            {
+                if(otherColliders[i].CompareTag("Lilypad"))
+                {
+                    onLilypad = true;
+                    break;
+                }
+            }
+
+            if(onLilypad)
+            {
+                player.SetState(player.IdleState);
+            }
+            else
+            {
+                player.SetState(player.DrownState);
+            }
         }
     }
 
@@ -50,6 +69,6 @@ public class PlayerHopState : PlayerBaseState
 
     public override void OnCollisionStay2D(PlayerStateManager player, Collision2D other)
     {
-
+        
     }
 }

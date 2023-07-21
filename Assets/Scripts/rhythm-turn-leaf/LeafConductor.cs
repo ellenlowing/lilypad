@@ -67,13 +67,7 @@ public class LeafConductor : MonoBehaviour
         // musicSource = GetComponent<AudioSource>();
         // clipLength = musicSource.clip.length;
         // musicSource.Play();
-        nextIndex = 0;
-        notes = new float[(int)Mathf.Floor(clipLength)];
-        for(int i = 0; i < Mathf.Floor(clipLength); i++)
-        {
-            notes[i] = (float)i;
-        }
-
+        
         playerManager = player.GetComponent<PlayerStateManager>();
     }
 
@@ -118,5 +112,13 @@ public class LeafConductor : MonoBehaviour
         currentGameState = GameState.Playing;
         secPerBeat = 60f / songBpm;
         dspSongTime = (float)AudioSettings.dspTime;
+        nextIndex = 0;
+        notes = new float[(int)Mathf.Floor(clipLength)];
+        for(int i = 0; i < Mathf.Floor(clipLength); i++)
+        {
+            notes[i] = (float)i;
+        }
+        playerManager.SetState(playerManager.IdleState);
+        playerManager.animator.SetBool("gameLost", false);
     }
 }
