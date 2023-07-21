@@ -8,8 +8,9 @@ namespace FroggyNamespace
 {
     public enum GameState
     {
-        Start,
+        Intro,
         Playing,
+        Paused,
         Win,
         Lose
     }
@@ -34,7 +35,7 @@ public class LeafConductor : MonoBehaviour
     [SerializeField]
     GameObject player;
 
-    public GameState currentGameState;
+    public GameState currentGameState = GameState.Intro;
     
     float secPerBeat;
     float songPosition;
@@ -67,8 +68,6 @@ public class LeafConductor : MonoBehaviour
     {
         // musicSource = GetComponent<AudioSource>();
         // clipLength = musicSource.clip.length;
-        secPerBeat = 60f / songBpm;
-        dspSongTime = (float)AudioSettings.dspTime;
         // musicSource.Play();
         nextIndex = 0;
         notes = new float[(int)Mathf.Floor(clipLength)];
@@ -80,21 +79,24 @@ public class LeafConductor : MonoBehaviour
 
     void Update()
     {
-        songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
-        songPositionInBeats = songPosition / secPerBeat;
-        
-        if(nextIndex < notes.Length && notes[nextIndex] < songPositionInBeats)
-        {
-            player.GetComponent<MovePlayer>().Jump();
-            nextIndex++;
-        } 
-        else if (songPositionInBeats < -1f)
-        {
-            countdownText.SetText("{0:0}", Mathf.Floor(-songPositionInBeats-1));
-        }
-        else
-        {
-            countdownText.gameObject.SetActive(false);
+        if(currentGameState == GameState.Playing)
+        {   
+            songPosition = (float)(AudioSettings.dspTime - dspSongTime - firstBeatOffset);
+            songPositionInBeats = songPosition / secPerBeat;
+            
+            if(nextIndex < notes.Length && notes[nextIndex] < songPositionInBeats)
+            {
+                player.GetComponent<MovePlayer>().Jump();
+                nextIndex++;
+            } 
+            else if (songPositionInBeats < 0f)
+            {
+                countdownText.SetText("{0:0}", Mathf.Floor(-songPositionInBeats)+1);
+            }
+            else
+            {
+                countdownText.gameObject.SetActive(false);
+            }
         }
 
         switch(currentGameState)
@@ -109,5 +111,12 @@ public class LeafConductor : MonoBehaviour
                 gameStateText.gameObject.SetActive(true);
                 break;
         }
+    }
+
+    public void StartGame()
+    {
+        currentGameState = GameState.Playing;
+        secPerBeat = 60f / songBpm;
+        dspSongTime = (float)AudioSettings.dspTime;
     }
 }
