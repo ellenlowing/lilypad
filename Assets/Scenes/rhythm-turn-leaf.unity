@@ -1430,7 +1430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e855a03e11d43a0a6d5a6525bc566b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  songBpm: 40
+  songBpm: 60
   clipLength: 9999
   firstBeatOffset: 3
   player: {fileID: 1427419668}
