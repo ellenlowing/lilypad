@@ -12,10 +12,30 @@ public class PlayerIdleState : PlayerBaseState
     public override void UpdateState(PlayerStateManager player)
     {
         player.hopDirection = Vector3.zero;
+        player.transform.localEulerAngles = Vector3.zero;
         
-        if(lilypadTransform != null)
+        float attackHorizontal = Input.GetAxisRaw("Horizontal_L");
+        float attackVertical = Input.GetAxisRaw("Vertical_L");
+        bool attacking = attackHorizontal != 0f || attackVertical != 0f;
+        player.animator.SetBool("attacking", attacking);
+
+        if(attacking)
         {
-            float rotZ = lilypadTransform.localEulerAngles.z % 360;
+            player.SetState(player.AttackState);
+            if(attackHorizontal == 1f)
+            {
+                player.transform.localEulerAngles = new Vector3(0f, 0f, -90f);
+            } else if (attackHorizontal == -1f)
+            {
+                player.transform.localEulerAngles = new Vector3(0f, 0f, 90f);
+            } else if (attackVertical == -1f)
+            {
+                player.transform.localEulerAngles = new Vector3(0f, 0f, 180f);
+            }
+        }
+        else if(lilypadTransform != null)
+        {
+            float rotZ = lilypadTransform.eulerAngles.z % 360;
             if(rotZ == 0f) 
             {
                 player.hopDirection.y = 1f;
@@ -32,7 +52,7 @@ public class PlayerIdleState : PlayerBaseState
             {
                 player.hopDirection.x = 1f;
             }
-            player.transform.localEulerAngles = new Vector3(0f, 0f, rotZ + 90f);
+            player.transform.parent.eulerAngles = new Vector3(0f, 0f, rotZ + 90f);
         }
         
     }

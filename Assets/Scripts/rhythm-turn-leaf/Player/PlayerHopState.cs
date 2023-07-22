@@ -14,10 +14,10 @@ public class PlayerHopState : PlayerBaseState
     public override void EnterState(PlayerStateManager player)
     {
         player.animator.SetTrigger("hopping");
-        startPosition = player.transform.position;
+        startPosition = player.transform.parent.position;
         endPosition = new Vector3(
-            player.transform.position.x + player.hopDirection.x * stepSize,
-            player.transform.position.y + player.hopDirection.y * stepSize,
+            player.transform.parent.position.x + player.hopDirection.x * stepSize,
+            player.transform.parent.position.y + player.hopDirection.y * stepSize,
             0f
         );
         hopTime = 0f;
@@ -33,7 +33,7 @@ public class PlayerHopState : PlayerBaseState
         {
             if(hopTime >= startHopTime && hopTime <= endHopTime)
             {
-                player.transform.position = Vector3.Lerp(startPosition, endPosition, (hopTime - startHopTime) / hopDuration);
+                player.transform.parent.position = Vector3.Lerp(startPosition, endPosition, (hopTime - startHopTime) / hopDuration);
             }
             hopTime += Time.deltaTime;
         } 
